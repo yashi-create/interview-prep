@@ -18,8 +18,10 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
 def index(request: Request):
+    # Render's health check pings "/" with HEAD, not GET - a GET-only route
+    # 405s that check, so Render never marks the deploy healthy.
     return templates.TemplateResponse("index.html", {"request": request})
 
 
