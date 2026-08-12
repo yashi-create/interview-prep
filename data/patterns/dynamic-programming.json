@@ -1,0 +1,13 @@
+{
+  "name": "Dynamic Programming (1D/2D state)",
+  "description": "Break a problem into overlapping subproblems where the optimal solution can be built from optimal solutions to smaller subproblems, cached to avoid recomputation.",
+  "signal_phrases": ["number of ways to", "minimum cost to reach", "longest common subsequence", "maximum profit", "can you partition into"],
+  "core_technique": "Identify the state (what varies between subproblems), write a recurrence relating state[i] to smaller states, then either memoize top-down (recursion + cache) or build bottom-up (iterative table).",
+  "common_pitfalls": "Not identifying the correct state dimensions (e.g., missing that you need dp[i][j] not just dp[i]); off-by-one on base cases; using O(n^2) space when the recurrence only depends on the previous row/state, missing a space-optimization opportunity.",
+  "example_problems": [
+    {"title": "Longest Common Subsequence", "why_it_fits": "Classic 2D DP -- state is (i, j) position in each string, recurrence compares characters and takes the best of three transitions."},
+    {"title": "House Robber", "why_it_fits": "1D DP -- state is 'max money up to house i', recurrence is max(rob this + dp[i-2], skip this = dp[i-1])."},
+    {"title": "Coin Change (minimum coins)", "why_it_fits": "1D DP over amount -- state is 'min coins to make amount x', recurrence tries every coin denomination."}
+  ],
+  "additional_considerations": "Always state the recurrence relation and base case explicitly before coding -- interviewers weight this reasoning heavily. After getting a working solution, mention whether space can be optimized (e.g., rolling array when only the previous row is needed) since it signals deeper understanding even if you don't implement it."
+}

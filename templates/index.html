@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interview Prep Copilot</title>
+    <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>DSA Pattern Recognition</h1>
+        <p class="subtitle">Paste a problem statement. This finds the underlying pattern,
+           shows where else it shows up, and flags what else you need to handle.</p>
+
+        <form hx-post="/analyze-form" hx-target="#result" hx-indicator="#loading">
+            <textarea
+                name="problem_statement"
+                rows="6"
+                placeholder="e.g. Given a sorted array, find two numbers that add up to a target value..."
+                required
+            ></textarea>
+            <button type="submit">Analyze</button>
+        </form>
+
+        <div id="loading" class="htmx-indicator">Analyzing against the reference pattern library...</div>
+        <div id="result"></div>
+    </main>
+</body>
+</html>

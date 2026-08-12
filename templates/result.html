@@ -1,0 +1,35 @@
+{% if error %}
+    <div class="error">{{ error }}</div>
+{% else %}
+    <div class="result-card">
+        <h2>Pattern: {{ result.pattern_name }}</h2>
+
+        <section>
+            <h3>Why this pattern</h3>
+            <p>{{ result.why_this_pattern }}</p>
+        </section>
+
+        <section>
+            <h3>Core technique</h3>
+            <p>{{ result.core_technique }}</p>
+        </section>
+
+        <section>
+            <h3>Where else this pattern shows up</h3>
+            <ul>
+                {% for problem in result.similar_problems %}
+                <li>{{ problem }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h3>What else you need to handle</h3>
+            <p>{{ result.additional_considerations }}</p>
+        </section>
+
+        <section class="confidence">
+            <strong>Confidence:</strong> {{ result.confidence_note }}
+        </section>
+    </div>
+{% endif %}

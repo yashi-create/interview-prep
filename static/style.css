@@ -1,0 +1,128 @@
+:root {
+    --bg: #0d1117;
+    --surface: #151b23;
+    --border: #2a3038;
+    --text: #d5dae1;
+    --text-dim: #7d8590;
+    --accent: #4fd1c5;   /* teal - signal/pattern-match association, not the common orange/green defaults */
+    --accent-dim: #285c56;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "SF Mono", "JetBrains Mono", Consolas, monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+}
+
+h1 {
+    font-size: 1.5rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.25rem;
+    color: var(--text);
+}
+
+h1::before {
+    content: "> ";
+    color: var(--accent);
+}
+
+.subtitle {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 0.9rem;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+textarea:focus, button:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+button {
+    margin-top: 0.75rem;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    font-family: inherit;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+button:hover { background: var(--accent); color: var(--bg); }
+
+.htmx-indicator {
+    display: none;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+}
+.htmx-request .htmx-indicator,
+.htmx-request.htmx-indicator { display: block; }
+
+.result-card {
+    margin-top: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 1.5rem;
+}
+
+.result-card h2 {
+    color: var(--accent);
+    font-size: 1.15rem;
+    margin-top: 0;
+}
+
+.result-card h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin-bottom: 0.35rem;
+}
+
+.result-card section { margin-bottom: 1.25rem; }
+.result-card p { line-height: 1.55; margin: 0; }
+.result-card ul { margin: 0; padding-left: 1.2rem; line-height: 1.6; }
+
+.confidence {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+}
+
+.error {
+    margin-top: 1.5rem;
+    color: #ff8080;
+    border: 1px solid #5c2a2a;
+    background: #1f1213;
+    padding: 1rem;
+    border-radius: 4px;
+}

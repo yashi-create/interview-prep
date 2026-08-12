@@ -1,0 +1,13 @@
+{
+  "name": "Sliding Window",
+  "description": "Maintain a window (subarray/substring) defined by two pointers that expands and contracts based on a condition, avoiding recomputation of the window's stats from scratch each time.",
+  "signal_phrases": ["longest substring", "maximum subarray of size k", "at most k distinct", "minimum window", "contiguous subarray"],
+  "core_technique": "Expand the window by moving the right pointer; when the window violates a constraint, shrink from the left until it's valid again, updating a running aggregate (sum/count/set) incrementally rather than recomputing.",
+  "common_pitfalls": "Recomputing window stats from scratch each iteration (defeats the purpose -- should be O(n) not O(n*k)); forgetting to shrink the window fully before comparing to the best answer; off-by-one on window size (k) vs window bounds (right - left + 1).",
+  "example_problems": [
+    {"title": "Longest Substring Without Repeating Characters", "why_it_fits": "Window grows while characters are unique, shrinks from the left when a duplicate is seen -- classic variable-size window with a hash set tracking window contents."},
+    {"title": "Minimum Window Substring", "why_it_fits": "Need the smallest window containing all target characters -- expand until valid, then aggressively shrink while it stays valid, tracking the minimum."},
+    {"title": "Maximum Sum Subarray of Size K", "why_it_fits": "Fixed-size window -- simplest variant, just slide and maintain a running sum instead of recomputing."}
+  ],
+  "additional_considerations": "Distinguish fixed-size windows (simpler, just add new element and remove the one leaving) from variable-size windows (need a while-loop to shrink). For character-frequency windows, a hashmap/array of counts is usually cleaner than repeatedly scanning the window."
+}

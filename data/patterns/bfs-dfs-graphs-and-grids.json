@@ -1,0 +1,13 @@
+{
+  "name": "BFS / DFS on Graphs and Grids",
+  "description": "Traverse a graph or grid to explore connectivity, shortest paths (unweighted), or connected components. BFS for shortest path/level-order, DFS for exhaustive exploration or backtracking-adjacent problems.",
+  "signal_phrases": ["number of islands", "shortest path in unweighted graph", "connected components", "flood fill", "rotting oranges", "word ladder"],
+  "core_technique": "BFS: queue-based, explore level by level, first time you reach a node is the shortest path (unweighted). DFS: recursive/stack-based, explore as deep as possible before backtracking, natural for marking visited regions.",
+  "common_pitfalls": "Forgetting to mark nodes visited before enqueueing (causes duplicate processing or infinite loops in cyclic graphs); using DFS when BFS is required for shortest-path correctness; not handling multi-source BFS when a problem has multiple starting points (e.g., rotting oranges).",
+  "example_problems": [
+    {"title": "Number of Islands", "why_it_fits": "Grid traversal, DFS/BFS from each unvisited land cell, mark connected land as visited -- classic connected-components-on-a-grid."},
+    {"title": "Rotting Oranges", "why_it_fits": "Multi-source BFS -- all initially rotten oranges start in the queue simultaneously, since they all rot neighbors at the same time step."},
+    {"title": "Word Ladder", "why_it_fits": "Shortest transformation sequence in an unweighted implicit graph -- BFS guarantees shortest path in terms of number of transformations."}
+  ],
+  "additional_considerations": "For grid problems, watch for whether diagonal moves count as adjacent. For multi-source BFS, seed the queue with ALL sources before starting the traversal, not one at a time -- this is the most commonly missed detail."
+}

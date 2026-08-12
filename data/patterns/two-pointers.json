@@ -1,0 +1,13 @@
+{
+  "name": "Two Pointers",
+  "description": "Use two indices moving through a data structure (often from opposite ends, or one fast/one slow) to avoid nested loops. Works when the input is sorted, or when you're comparing/merging elements from two ends.",
+  "signal_phrases": ["sorted array", "pair sum", "palindrome check", "merge two sorted", "remove duplicates in place", "container with most water"],
+  "core_technique": "Move pointers inward (or one ahead of the other) based on a comparison, shrinking the search space by one element per step instead of re-scanning.",
+  "common_pitfalls": "Off-by-one errors at the boundary; forgetting to handle even vs odd length; not skipping duplicate values when the problem asks for unique combinations.",
+  "example_problems": [
+    {"title": "Two Sum II (sorted input)", "why_it_fits": "Sorted array + need a pair summing to target -> move left/right pointers inward based on whether the sum is too high or too low."},
+    {"title": "Container With Most Water", "why_it_fits": "Two ends of an array, area depends on the shorter wall -> always move the pointer at the shorter wall inward, since moving the taller one can never increase area."},
+    {"title": "3Sum", "why_it_fits": "Fix one element, then run two-pointer on the remaining sorted subarray -> reduces O(n^3) brute force to O(n^2)."}
+  ],
+  "additional_considerations": "For 3Sum-style problems, sort first (O(n log n)) and explicitly skip duplicate values at each pointer to avoid duplicate triplets in the output. For container problems, prove to yourself why the greedy pointer move is safe -- interviewers often ask you to justify it, not just code it."
+}
