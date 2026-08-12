@@ -1,0 +1,13 @@
+{
+    "name": "Backtracking",
+    "description": "Explore all possible configurations by making a choice, recursing, and undoing the choice (backtracking) if it doesn't lead to a valid solution. Used when you need to enumerate all valid combinations/permutations/placements, not just find one.",
+    "signal_phrases": ["all subsets", "all permutations", "generate all combinations", "N-Queens", "valid parentheses combinations", "word search in grid", "partition into"],
+    "core_technique": "Build a partial solution incrementally; at each step, try every valid next choice, recurse into it, and undo (backtrack) the choice before trying the next one. Prune branches early when a partial solution can't possibly lead to a valid one.",
+    "common_pitfalls": "Forgetting to undo state (e.g. remove from the current path list, unmark a visited cell) before trying the next branch - this silently corrupts later branches; not pruning early, leading to exponential blowup that a simple bounds check could avoid; mutating a shared list without copying it when appending to the results, so all stored results end up referencing the same (now-empty) list.",
+    "example_problems": [
+      {"title": "Subsets", "why_it_fits": "At each element, branch into 'include it' / 'exclude it' -- classic binary choice tree explored via backtracking."},
+      {"title": "Permutations", "why_it_fits": "Build permutations by choosing an unused element at each position, recursing, then unmarking it as used before trying the next candidate."},
+      {"title": "N-Queens", "why_it_fits": "Place a queen per row, recurse to the next row, backtrack (remove the queen) if no valid column remains -- with pruning via column/diagonal conflict checks."}
+    ],
+    "additional_considerations": "Always reason about the branching factor and depth out loud (interviewers care about the complexity, not just correctness). When appending a partial solution to the results list, copy it (e.g. `results.append(path[:])` in Python) -- appending the reference itself is one of the most common bugs, since the list keeps mutating after it's 'saved'."
+  }

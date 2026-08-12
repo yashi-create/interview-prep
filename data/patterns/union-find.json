@@ -1,0 +1,13 @@
+{
+    "name": "Union-Find (Disjoint Set)",
+    "description": "Track a dynamic collection of disjoint sets, supporting near-constant-time 'are these two elements in the same group' queries and 'merge these two groups' operations. Used for connectivity problems where the graph is being built incrementally, not given all at once.",
+    "signal_phrases": ["number of connected components", "redundant connection", "accounts merge", "friend circles", "smallest equivalent string", "graph valid tree"],
+    "core_technique": "Maintain a parent array where each element points to its representative (root). `find(x)` follows parent pointers to the root, with path compression (point nodes directly to the root as you go) to keep future lookups fast. `union(x, y)` merges the two roots, ideally using union by rank/size to keep the tree shallow.",
+    "common_pitfalls": "Forgetting path compression or union by rank, which degrades find() from near-O(1) to O(n) in the worst case (a long chain); not initializing every element as its own parent before starting; miscounting the number of components (should decrement a counter only when a union actually merges two DIFFERENT roots, not on every union call).",
+    "example_problems": [
+      {"title": "Number of Connected Components in an Undirected Graph", "why_it_fits": "Union every edge's two endpoints; the final number of distinct roots is the number of components -- direct application with no extra logic needed."},
+      {"title": "Redundant Connection", "why_it_fits": "Process edges in order and union them; the first edge whose two endpoints are ALREADY in the same set (find(a) == find(b) before unioning) is the redundant one creating a cycle."},
+      {"title": "Accounts Merge", "why_it_fits": "Union accounts that share any email; after processing, group emails by their root to produce the merged account lists -- union-find avoids repeated graph traversal for each merge."}
+    ],
+    "additional_considerations": "This pattern is often missed because the problem is phrased as 'merge/group/connect' rather than explicitly 'graph' -- if the input is a stream of pairwise relationships and you need to answer connectivity queries efficiently, that's the signal, even without the word 'graph' appearing. Always implement both path compression AND union by rank/size together; either alone is fine, but interviewers often ask about the combined complexity (near-O(1) amortized, technically O(alpha(n)))."
+  }
