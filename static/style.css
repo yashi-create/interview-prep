@@ -426,6 +426,19 @@ button:disabled {
     font-size: 0.75rem;
 }
 
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.brand img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
 /* Tablet */
 @media (max-width: 768px) {
     .navbar { padding: 1.25rem 1.25rem 0; }
