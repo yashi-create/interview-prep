@@ -1,4 +1,4 @@
-# Interview Prep Copilot — Phase 1: DSA Pattern Recognition
+# Motif — Phase 1: DSA Pattern Recognition
 
 A RAG-powered tool that takes a DSA problem statement and identifies the
 underlying pattern it belongs to (Two Pointers, Sliding Window, Binary Search
