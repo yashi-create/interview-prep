@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from pathlib import Path
 
 from app.database import get_db
 from app.retrieval import find_candidate_patterns, pattern_to_dict
@@ -13,6 +14,7 @@ from app.routes import questions
 import json
 
 app = FastAPI(title="Interview Prep Copilot - DSA Pattern Recognition")
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # /api/analyze is meant to be called from other platforms (a mobile app, a
 # separate frontend) - there's no cookie/session auth here for a permissive
@@ -25,8 +27,15 @@ app.add_middleware(
 )
 
 app.include_router(questions.router)
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+app.mount(
+    "/static",
+    StaticFiles(directory=BASE_DIR / "static"),
+    name="static"
+)
+
+templates = Jinja2Templates(
+    directory=BASE_DIR / "templates"
+)
 
 
 @app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
