@@ -63,7 +63,7 @@ def run():
                 # replace wholesale rather than diffing - cascade="all, delete-orphan"
                 # on the relationship handles dropping the old rows.
                 existing.example_problems = [
-                    ExampleProblem(title=ep["title"], why_it_fits=ep["why_it_fits"])
+                    ExampleProblem(title=ep["title"], why_it_fits=ep["why_it_fits"], url=ep.get("url"))
                     for ep in p["example_problems"]
                 ]
                 print(f"Updated '{p['name']}'.")
@@ -87,6 +87,7 @@ def run():
                         pattern_id=pattern.id,
                         title=ep["title"],
                         why_it_fits=ep["why_it_fits"],
+                        url=ep.get("url")
                     )
                 )
 

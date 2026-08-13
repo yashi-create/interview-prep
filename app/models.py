@@ -38,6 +38,7 @@ class ExampleProblem(Base):
 
     id = Column(Integer, primary_key=True)
     pattern_id = Column(Integer, ForeignKey("patterns.id"), nullable=False)
+    url = Column(String, nullable=True)
     title = Column(String, nullable=False)
     why_it_fits = Column(Text, nullable=False)
 

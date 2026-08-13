@@ -5,9 +5,18 @@
   "core_technique": "Lean on core identities: XOR of a number with itself is 0 and with 0 is itself (so XOR-ing a list cancels out pairs, leaving the odd one out); `n & (n-1)` clears the lowest set bit (useful for counting set bits or checking powers of two); a bitmask from 0 to 2^n - 1 can represent every possible subset of an n-element set, where bit i being 1 means element i is included.",
   "common_pitfalls": "Forgetting XOR is both commutative and associative, which is WHY order doesn't matter when cancelling pairs - not realizing this can lead to overcomplicating a one-line solution; sign/overflow issues when shifting in languages with fixed-width integers (less of a concern in Python, but worth mentioning if the problem is language-agnostic); using bit tricks for readability's sake when a simple hashmap/set solution is clearer and the interviewer didn't ask for the O(1)-space optimization.",
   "example_problems": [
-    {"title": "Single Number", "why_it_fits": "Every element appears twice except one - XOR-ing the entire array cancels all pairs (a^a=0), leaving only the unpaired element, in O(n) time and O(1) space."},
-    {"title": "Number of 1 Bits", "why_it_fits": "Repeatedly apply `n & (n-1)` to clear the lowest set bit and count how many times you can do this before n becomes 0 - faster than checking each of 32 bits individually."},
-    {"title": "Subsets", "why_it_fits": "Alternative to the backtracking approach - iterate bitmasks from 0 to 2^n - 1, and for each, check which bits are set to determine which elements are included in that subset."}
+    {"title": "Single Number",
+      "url": "",
+      "why_it_fits": "Every element appears twice except one - XOR-ing the entire array cancels all pairs (a^a=0), leaving only the unpaired element, in O(n) time and O(1) space."
+    },
+    {"title": "Number of 1 Bits", 
+      "url": "",
+      "why_it_fits": "Repeatedly apply `n & (n-1)` to clear the lowest set bit and count how many times you can do this before n becomes 0 - faster than checking each of 32 bits individually."
+    },
+    {"title": "Subsets",
+      "url": "",
+      "why_it_fits": "Alternative to the backtracking approach - iterate bitmasks from 0 to 2^n - 1, and for each, check which bits are set to determine which elements are included in that subset."
+    }
   ],
   "additional_considerations": "When a bit trick feels like the 'clever' answer, also be ready to explain the straightforward hashmap/set approach first - interviewers often want to see you recognize the space/time tradeoff being made, not just recite the trick. For subset-via-bitmask problems, explicitly connect it back to the Backtracking pattern as an alternative approach to the same problem - showing you see the two are solving the same underlying question differently is a strong signal."
 }

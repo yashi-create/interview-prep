@@ -353,6 +353,22 @@ button:disabled {
     color: var(--accent);
 }
 
+.problem-list a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.problem-list a:hover {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.problem-list li::after {
+    content: "↗";
+    float: right;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+}
+
 .confidence {
     border-top: 1px solid var(--border);
     padding-top: 1.1rem;

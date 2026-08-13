@@ -14,14 +14,17 @@
   "example_problems": [
     {
       "title": "Number of Islands",
+      "url": "",
       "why_it_fits": "Grid traversal, DFS/BFS from each unvisited land cell, mark connected land as visited -- classic connected-components-on-a-grid."
     },
     {
       "title": "Rotting Oranges",
+      "url": "",
       "why_it_fits": "Multi-source BFS -- all initially rotten oranges start in the queue simultaneously, since they all rot neighbors at the same time step."
     },
     {
       "title": "Word Ladder",
+      "url": "",
       "why_it_fits": "Shortest transformation sequence in an unweighted implicit graph -- BFS guarantees shortest path in terms of number of transformations."
     }
   ],

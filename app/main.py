@@ -8,6 +8,7 @@ from pathlib import Path
 
 from app.database import get_db
 from app.retrieval import find_candidate_patterns, pattern_to_dict
+from app.routes.questions import _attach_urls
 from app.llm import analyze_problem
 from app.models import Attempt
 from app.routes import questions
@@ -67,6 +68,12 @@ def analyze_form(
 
     candidate_dicts = [pattern_to_dict(pattern, distance) for pattern, distance in candidates]
     result = analyze_problem(problem_statement, candidate_dicts)
+
+    matched_pattern_obj = next(
+        (p for p, _ in candidates if p.name == result.get("pattern_name")),
+        None,
+    ) if result.get("matched") else None
+    result = _attach_urls(result, matched_pattern_obj)
 
     matched_pattern_id = next(
         (pattern.id for pattern, _ in candidates if pattern.name == result.get("pattern_name")),

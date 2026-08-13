@@ -13,14 +13,17 @@
   "example_problems": [
     {
       "title": "Koko Eating Bananas",
+      "url": "",
       "why_it_fits": "Binary search over possible eating speeds; feasibility check is 'can Koko finish all bananas at this speed within h hours' -- monotonic in speed."
     },
     {
       "title": "Capacity To Ship Packages Within D Days",
+      "url": "",
       "why_it_fits": "Same shape -- binary search over ship capacity, feasibility check simulates whether that capacity ships everything in D days."
     },
     {
       "title": "Split Array Largest Sum",
+      "url": "",
       "why_it_fits": "Binary search over the 'largest subarray sum' answer, feasibility check greedily partitions and counts subarrays needed."
     }
   ],
