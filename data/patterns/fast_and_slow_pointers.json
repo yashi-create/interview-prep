@@ -1,0 +1,13 @@
+{
+  "name": "Fast and Slow Pointers",
+  "description": "Use two pointers moving through a linked list (or an implicit sequence) at different speeds to detect cycles, find midpoints, or find the start of a cycle - without needing extra memory to track visited nodes.",
+  "signal_phrases": ["linked list cycle", "find the middle of a linked list", "happy number", "duplicate number detection via cycle", "palindrome linked list"],
+  "core_technique": "Move a slow pointer one step at a time and a fast pointer two steps at a time. If there's a cycle, they will eventually meet inside it. If there's no cycle, the fast pointer reaches the end first. For finding a cycle's start, after they meet, reset one pointer to the head and move both one step at a time - they meet again exactly at the cycle's start (Floyd's algorithm).",
+  "common_pitfalls": "Not checking `fast` and `fast.next` are both non-null before advancing fast by two (causes a null pointer exception near the end of the list); assuming the pointers meet at the cycle's start on the first meeting - they don't, a second phase is required; applying this pattern to problems that aren't actually about cycles/midpoints, where a simple single pass would be clearer.",
+  "example_problems": [
+    {"title": "Linked List Cycle", "why_it_fits": "Classic Floyd's cycle detection - if slow and fast pointers ever meet, a cycle exists; if fast reaches null, there isn't one."},
+    {"title": "Middle of the Linked List", "why_it_fits": "When fast reaches the end (having moved twice as far), slow is exactly at the midpoint - no need to count the list length first."},
+    {"title": "Happy Number", "why_it_fits": "Repeatedly applying digit-square-sum either reaches 1 or enters a cycle - treating each number as a node in an implicit linked list makes this a direct cycle-detection problem."}
+  ],
+  "additional_considerations": "This pattern is easy to miss because the problem doesn't literally say 'linked list' (see Happy Number) - the signal is any process that repeatedly transforms a value and you need to detect whether it cycles or terminates. Always state explicitly whether you need just cycle detection (one phase) or the cycle's starting node (two phases) before coding, since the second phase is the part most people forget."
+}

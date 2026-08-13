@@ -1,0 +1,13 @@
+{
+  "name": "Greedy / Interval Scheduling",
+  "description": "Make the locally optimal choice at each step, sorted by some key, and prove (or argue) that this local choice never prevents reaching the global optimum. Especially common for interval-overlap and scheduling problems.",
+  "signal_phrases": ["maximum non-overlapping intervals", "merge intervals", "meeting rooms", "minimum number of arrows", "jump game", "gas station"],
+  "core_technique": "Sort the input by a key that makes the greedy choice obvious (e.g. by interval end time for scheduling, or by start time for merging), then scan once, making the locally best decision at each step without ever reconsidering past choices.",
+  "common_pitfalls": "Sorting by the wrong key - e.g. sorting intervals by start time when the problem needs end time (or vice versa) silently gives a suboptimal or wrong answer; assuming a greedy approach works without verifying the problem actually has the 'greedy choice property' - many problems that look greedy actually require DP because an early locally-optimal choice can block a better global solution; off-by-one on whether touching intervals (end of one = start of next) count as overlapping.",
+  "example_problems": [
+    {"title": "Non-overlapping Intervals", "why_it_fits": "Sort by end time, greedily keep an interval if it starts after the last kept interval's end - keeping the earliest-ending interval always leaves the most room for future intervals."},
+    {"title": "Merge Intervals", "why_it_fits": "Sort by start time, then scan once merging any interval that overlaps with the current merged range - a single pass suffices once sorted."},
+    {"title": "Jump Game", "why_it_fits": "Greedily track the farthest reachable index seen so far while scanning left to right - if the current index ever exceeds that farthest reach, it's unreachable."}
+  ],
+  "additional_considerations": "Before committing to a greedy solution in an interview, briefly justify WHY the greedy choice is safe (e.g. 'keeping the earliest-ending interval can never be worse than keeping any other, since it leaves at least as much room') - this reasoning is what separates a greedy solution that happens to pass from one that's demonstrably correct. If you can't articulate why the locally optimal choice is globally safe, that's a signal the problem may actually need DP instead."
+}

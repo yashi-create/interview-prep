@@ -1,0 +1,13 @@
+{
+  "name": "Trie (Prefix Tree)",
+  "description": "A tree structure where each path from root to a node represents a string prefix, enabling fast prefix-based lookups, autocomplete, and word search that a hashmap of full strings can't do efficiently.",
+  "signal_phrases": ["implement autocomplete", "word search II", "longest common prefix", "add and search word", "prefix matching"],
+  "core_technique": "Each node holds a map/array of children keyed by character, plus a flag marking whether a complete word ends at that node. Inserting a word walks/creates nodes character by character. Searching for a word or a prefix walks the same path and checks either the end-of-word flag (exact match) or just that the path exists (prefix match).",
+  "common_pitfalls": "Confusing 'does this prefix exist' with 'does this exact word exist' - these need different checks (path exists vs. path exists AND end-of-word flag is true); not handling the search for wildcard characters (e.g. 'Add and Search Word' with '.') which requires branching DFS instead of a simple linear walk; using a hashmap of children when a fixed-size array (e.g. 26 for lowercase letters) would be simpler and faster for constrained alphabets.",
+  "example_problems": [
+    {"title": "Implement Trie (Prefix Tree)", "why_it_fits": "Direct implementation - insert, search (exact word), and startsWith (prefix) as the three core trie operations."},
+    {"title": "Word Search II", "why_it_fits": "Build a trie of the target words, then DFS through the grid while simultaneously walking the trie - pruning grid paths early the moment they stop matching any trie prefix, avoiding a separate search per word."},
+    {"title": "Add and Search Word", "why_it_fits": "Standard trie search, but a '.' wildcard means trying all children at that position - requires DFS/backtracking layered on top of the trie walk instead of a single deterministic path."}
+  ],
+  "additional_considerations": "For grid-search problems combining a trie with DFS (like Word Search II), removing words from the trie (or marking them found) once matched avoids re-reporting duplicates and can prune the search further. Always clarify the alphabet size upfront - it determines whether an array-based or hashmap-based children structure is more appropriate."
+}

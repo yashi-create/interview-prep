@@ -1,0 +1,13 @@
+{
+  "name": "Heap / Priority Queue",
+  "description": "Maintain a min-heap or max-heap to repeatedly access the smallest/largest element in O(log n), useful whenever a problem asks for the top-k, k-th, or ongoing running min/max across a stream of elements.",
+  "signal_phrases": ["top k elements", "k closest points", "k-th largest", "merge k sorted lists", "median of a stream", "task scheduling by frequency"],
+  "core_technique": "Push elements into a heap sized to the constraint (e.g. keep only k elements for top-k problems, popping the worst when the heap exceeds size k), or use two heaps (a max-heap for the lower half, min-heap for the upper half) for running-median-style problems.",
+  "common_pitfalls": "Using a max-heap when a min-heap is needed (or vice versa) - most languages' heap libraries default to min-heap, so max-heap behavior needs negation of values; not bounding heap size for top-k problems, which gives correct but unnecessarily slow O(n log n) instead of O(n log k); forgetting heap operations are O(log n) not O(1), which matters when reasoning about overall complexity.",
+  "example_problems": [
+    {"title": "Kth Largest Element in an Array", "why_it_fits": "Maintain a min-heap of size k; if a new element is larger than the heap's minimum, replace it -- the heap's top is always the k-th largest seen so far."},
+    {"title": "Merge k Sorted Lists", "why_it_fits": "Push the head of each list into a min-heap keyed by value; repeatedly pop the smallest, push its successor -- avoids comparing all k heads pairwise every step."},
+    {"title": "Find Median from Data Stream", "why_it_fits": "Two-heap technique: max-heap holds the smaller half, min-heap holds the larger half, kept balanced in size -- median is derivable from the two heap tops in O(1)."}
+  ],
+  "additional_considerations": "For top-k problems, always ask whether a bounded heap (size k) is better than sorting the entire input (O(n log n)) -- a size-k heap gives O(n log k), which is a meaningful improvement to point out when n is large and k is small. For the two-heap median pattern, the rebalancing step (moving an element between heaps if sizes differ by more than 1) is the detail most people forget."
+}

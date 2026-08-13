@@ -2,27 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interview Prep Copilot</title>
     <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <div class="glow"></div>
     <main class="container">
-        <h1>DSA Pattern Recognition</h1>
-        <p class="subtitle">Paste a problem statement. This finds the underlying pattern,
-           shows where else it shows up, and flags what else you need to handle.</p>
+        <header class="hero">
+            <span class="eyebrow">pattern recognition · dsa</span>
+            <h1>What pattern is this, really?</h1>
+            <p class="subtitle">Paste a problem statement. This retrieves the closest-matching
+               pattern from a reference library, explains why it fits, points to other problems
+               that share it, and flags what else you need to handle — grounded in the retrieved
+               material, not guessed.</p>
+        </header>
 
-        <form hx-post="/analyze-form" hx-target="#result" hx-indicator="#loading">
+        <form
+            id="analyze-form"
+            hx-post="/analyze-form"
+            hx-target="#result"
+            hx-indicator="#loading"
+            hx-on::before-request="document.getElementById('result').innerHTML = ''; document.getElementById('submit-btn').disabled = true;"
+            hx-on::after-request="document.getElementById('submit-btn').disabled = false;"
+        >
             <textarea
                 name="problem_statement"
                 rows="6"
                 placeholder="e.g. Given a sorted array, find two numbers that add up to a target value..."
                 required
             ></textarea>
-            <button type="submit">Analyze</button>
+            <button type="submit" id="submit-btn">
+                <span>Analyze</span>
+            </button>
         </form>
 
-        <div id="loading" class="htmx-indicator">Analyzing against the reference pattern library...</div>
+        <div id="loading" class="htmx-indicator">
+            <span class="spinner"></span>
+            Matching against the pattern library...
+        </div>
         <div id="result"></div>
     </main>
 </body>

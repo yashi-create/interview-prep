@@ -1,0 +1,13 @@
+{
+  "name": "Matrix Traversal",
+  "description": "Systematically walk a 2D grid in a specific order (spiral, diagonal, row/column-wise) or search it efficiently by exploiting sorted structure - distinct from BFS/DFS grid problems, which explore connectivity rather than a fixed traversal order.",
+  "signal_phrases": ["spiral matrix", "rotate image", "search a 2D matrix", "set matrix zeroes", "diagonal traverse"],
+  "core_technique": "For boundary-based traversals (spiral): maintain four boundaries (top, bottom, left, right) and shrink them inward after traversing each side, stopping when boundaries cross. For sorted-matrix search: if rows and columns are both sorted, start from a corner (e.g. top-right) and eliminate a full row or column with each comparison, achieving O(m+n) instead of O(m*n). For in-place rotation: rotate via transpose-then-reverse (90 degrees) rather than using an auxiliary matrix, when O(1) extra space is required.",
+  "common_pitfalls": "Off-by-one errors when shrinking boundaries in spiral traversal, especially for single-row or single-column remaining slices (a common cause of duplicated or skipped elements); starting the sorted-matrix search from the wrong corner - top-left or bottom-right don't give a clean elimination property, only top-right or bottom-left do; forgetting 'in-place' requirements and using O(n) extra space when the problem explicitly disallows it (e.g. Set Matrix Zeroes done naively vs. using the first row/column as markers).",
+  "example_problems": [
+    {"title": "Spiral Matrix", "why_it_fits": "Direct boundary-shrinking traversal - walk right along the top boundary, down the right boundary, left along the bottom, up the left, shrinking each boundary after use, until they cross."},
+    {"title": "Search a 2D Matrix II", "why_it_fits": "Rows and columns are independently sorted - starting from the top-right corner, each comparison eliminates either a full row or a full column, giving O(m+n) instead of a full scan."},
+    {"title": "Rotate Image", "why_it_fits": "In-place 90-degree rotation without extra space - achieved by transposing the matrix (swap across the diagonal) and then reversing each row, rather than copying into a new matrix."}
+  ],
+  "additional_considerations": "For spiral/boundary traversals, explicitly check after each side whether top > bottom or left > right before continuing to the next side - skipping this check is what causes duplicate elements when the remaining region collapses to a single row or column. For sorted-matrix search, state out loud which corner you're starting from and why it guarantees elimination - this reasoning is often what the interviewer is actually testing, not just the working code."
+}

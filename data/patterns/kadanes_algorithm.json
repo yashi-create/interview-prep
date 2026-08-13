@@ -1,0 +1,13 @@
+{
+  "name": "Kadane's Algorithm (Maximum Subarray)",
+  "description": "Find the maximum (or minimum) sum contiguous subarray in O(n) by tracking a running sum that resets whenever continuing it would hurt more than starting fresh, rather than checking every possible subarray.",
+  "signal_phrases": ["maximum subarray sum", "maximum product subarray", "maximum sum circular subarray", "best time to buy and sell stock"],
+  "core_technique": "Track `current_sum` (best sum of a subarray ending exactly at the current index) and `max_sum` (best seen anywhere so far). At each element, decide whether to extend the current subarray (current_sum + element) or start a new one at this element (just element) - whichever is larger. Update max_sum with current_sum after each step.",
+  "common_pitfalls": "Initializing max_sum to 0 instead of negative infinity (or the first element) - this silently gives a wrong answer when all elements are negative, since the correct answer should be the least-negative single element, not 0; for the product variant, forgetting that a negative number flips max and min - you must track BOTH running max and running min product, since a very negative min times a new negative number can become the new max; resetting current_sum to 0 instead of comparing 'extend vs restart' properly.",
+  "example_problems": [
+    {"title": "Maximum Subarray", "why_it_fits": "The textbook Kadane's problem - at each index, decide whether extending the running subarray or starting fresh here gives a better sum."},
+    {"title": "Maximum Product Subarray", "why_it_fits": "Same running idea, but because a negative times a negative can become the largest product, you must track both a running max AND running min product at each step, swapping them when the current element is negative."},
+    {"title": "Best Time to Buy and Sell Stock", "why_it_fits": "Equivalent to finding the maximum difference between a later and earlier element - can be reframed as a Kadane's-style running max-profit-so-far scan, tracking the minimum price seen so far."}
+  ],
+  "additional_considerations": "Always state the initialization of your running variables out loud (negative infinity vs. first element vs. 0) - this is the single most common source of bugs in Kadane's-based solutions, especially with all-negative or single-element edge cases. Mention explicitly whether the problem allows an empty subarray (sum 0) or requires at least one element - this changes the correct initialization."
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Topological Sort",
+  "description": "Order the nodes of a directed acyclic graph (DAG) such that every edge u->v places u before v. Used whenever a problem involves dependencies or prerequisites that must be satisfied in sequence.",
+  "signal_phrases": ["course schedule", "task scheduling with prerequisites", "build order", "alien dictionary", "compilation order"],
+  "core_technique": "Kahn's algorithm (BFS-based): compute in-degree for every node, start with all in-degree-0 nodes in a queue, repeatedly pop a node, add it to the result, and decrement its neighbors' in-degrees, enqueueing any that reach 0. Alternatively, DFS-based: run DFS from every unvisited node, and prepend each node to the result after all its descendants have been fully explored (post-order).",
+  "common_pitfalls": "Not detecting cycles - if the result list ends up shorter than the total node count (Kahn's) or a node is revisited while still on the current DFS path (DFS-based), the graph has a cycle and no valid ordering exists, which the problem often requires you to report; building the graph and in-degree counts incorrectly (edge direction reversed relative to what 'prerequisite' means in the problem); forgetting a graph can have multiple valid topological orders - checking against one 'expected' order in tests is a mistake.",
+  "example_problems": [
+    {"title": "Course Schedule", "why_it_fits": "Courses are nodes, prerequisites are directed edges - determine if a valid course order exists, which is exactly asking whether the graph is a DAG (Kahn's algorithm naturally detects the cycle case)."},
+    {"title": "Course Schedule II", "why_it_fits": "Same graph, but return the actual valid ordering instead of just yes/no - direct output of Kahn's algorithm's processing order."},
+    {"title": "Alien Dictionary", "why_it_fits": "Derive character ordering constraints by comparing adjacent words, build a graph of 'this letter comes before that letter,' then topologically sort the letters."}
+  ],
+  "additional_considerations": "Always state upfront whether you're using Kahn's (BFS, naturally reports cycles via count mismatch) or DFS-based (needs explicit visiting-state tracking: unvisited/in-progress/done to detect back-edges) - mixing up 'visited' with 'currently on the recursion stack' is the most common DFS-based bug. For Alien Dictionary-style problems, only adjacent-word comparisons at the FIRST differing character give a valid edge - comparing entire words or all character pairs is a common overreach."
+}

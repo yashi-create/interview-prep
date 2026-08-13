@@ -1,22 +1,42 @@
 {% if error %}
-    <div class="error">{{ error }}</div>
+    <div class="error">
+        <span class="error-icon">!</span>
+        <span>{{ error }}</span>
+    </div>
+{% elif not result.matched %}
+    <div class="result-card no-match">
+        <div class="card-header">
+            <span class="status-badge status-badge--warn">No confident match</span>
+        </div>
+        <section>
+            <h3>What's going on</h3>
+            <p>{{ result.why_this_pattern }}</p>
+        </section>
+        <section class="confidence">
+            <span class="confidence-label">Confidence</span>
+            <p>{{ result.confidence_note }}</p>
+        </section>
+    </div>
 {% else %}
     <div class="result-card">
-        <h2>Pattern: {{ result.pattern_name }}</h2>
+        <div class="card-header">
+            <span class="status-badge status-badge--match">Matched</span>
+            <h2>{{ result.pattern_name }}</h2>
+        </div>
 
         <section>
-            <h3>Why this pattern</h3>
+            <h3><span class="section-icon">◆</span> Why this pattern</h3>
             <p>{{ result.why_this_pattern }}</p>
         </section>
 
         <section>
-            <h3>Core technique</h3>
+            <h3><span class="section-icon">◆</span> Core technique</h3>
             <p>{{ result.core_technique }}</p>
         </section>
 
         <section>
-            <h3>Where else this pattern shows up</h3>
-            <ul>
+            <h3><span class="section-icon">◆</span> Where else this pattern shows up</h3>
+            <ul class="problem-list">
                 {% for problem in result.similar_problems %}
                 <li>{{ problem }}</li>
                 {% endfor %}
@@ -24,12 +44,13 @@
         </section>
 
         <section>
-            <h3>What else you need to handle</h3>
+            <h3><span class="section-icon">◆</span> What else you need to handle</h3>
             <p>{{ result.additional_considerations }}</p>
         </section>
 
         <section class="confidence">
-            <strong>Confidence:</strong> {{ result.confidence_note }}
+            <span class="confidence-label">Confidence</span>
+            <p>{{ result.confidence_note }}</p>
         </section>
     </div>
 {% endif %}

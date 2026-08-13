@@ -1,13 +1,28 @@
 {
   "name": "Binary Search on Answer",
   "description": "When the problem asks to minimize/maximize some value and you can write a monotonic 'is this value feasible?' check, binary search over the answer space instead of the input array.",
-  "signal_phrases": ["minimize the maximum", "maximize the minimum", "smallest value such that", "capacity to ship packages", "koko eating bananas"],
+  "signal_phrases": [
+    "minimize the maximum",
+    "maximize the minimum",
+    "smallest value such that",
+    "capacity to ship packages",
+    "koko eating bananas"
+  ],
   "core_technique": "Define a feasibility function f(x) that's monotonic (true for all x >= some threshold, false below it). Binary search over the range of possible answers, calling f(mid) to decide which half to keep.",
   "common_pitfalls": "Forgetting to prove/verify monotonicity before applying binary search -- if the feasibility function isn't monotonic, this pattern silently gives wrong answers; incorrect boundary handling (lo=mid vs lo=mid+1 depending on which half is kept).",
   "example_problems": [
-    {"title": "Koko Eating Bananas", "why_it_fits": "Binary search over possible eating speeds; feasibility check is 'can Koko finish all bananas at this speed within h hours' -- monotonic in speed."},
-    {"title": "Capacity To Ship Packages Within D Days", "why_it_fits": "Same shape -- binary search over ship capacity, feasibility check simulates whether that capacity ships everything in D days."},
-    {"title": "Split Array Largest Sum", "why_it_fits": "Binary search over the 'largest subarray sum' answer, feasibility check greedily partitions and counts subarrays needed."}
+    {
+      "title": "Koko Eating Bananas",
+      "why_it_fits": "Binary search over possible eating speeds; feasibility check is 'can Koko finish all bananas at this speed within h hours' -- monotonic in speed."
+    },
+    {
+      "title": "Capacity To Ship Packages Within D Days",
+      "why_it_fits": "Same shape -- binary search over ship capacity, feasibility check simulates whether that capacity ships everything in D days."
+    },
+    {
+      "title": "Split Array Largest Sum",
+      "why_it_fits": "Binary search over the 'largest subarray sum' answer, feasibility check greedily partitions and counts subarrays needed."
+    }
   ],
   "additional_considerations": "This pattern is easy to miss because the problem doesn't mention 'sorted' or 'search' at all -- the signal is 'minimize the maximum' or 'find the smallest x such that a condition holds.' Always state the feasibility function and argue monotonicity out loud in an interview before coding."
 }
