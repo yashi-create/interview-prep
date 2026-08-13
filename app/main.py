@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Depends, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -13,16 +14,31 @@ import json
 
 app = FastAPI(title="Interview Prep Copilot - DSA Pattern Recognition")
 
+# /api/analyze is meant to be called from other platforms (a mobile app, a
+# separate frontend) - there's no cookie/session auth here for a permissive
+# origin policy to put at risk, so a wide-open policy is the simple choice.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
+
 app.include_router(questions.router)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
 
 @app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
-def index(request: Request):
+def home(request: Request):
     # Render's health check pings "/" with HEAD, not GET - a GET-only route
     # 405s that check, so Render never marks the deploy healthy.
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("home.html", {"request": request, "active": "home"})
+
+
+@app.get("/analyze", response_class=HTMLResponse)
+def analyze_page(request: Request):
+    return templates.TemplateResponse("analyze.html", {"request": request, "active": "analyze"})
 
 
 @app.post("/analyze-form", response_class=HTMLResponse)

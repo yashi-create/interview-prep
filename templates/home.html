@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Prep Copilot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="glow"></div>
+    {% include "_nav.html" %}
+    <main class="container">
+        <header class="hero">
+            <span class="eyebrow">grounded rag · dsa pattern recognition</span>
+            <h1>Stop guessing the pattern. Ground it.</h1>
+            <p class="subtitle">Paste a problem statement and get back the pattern it actually
+               belongs to — retrieved from a curated reference library and checked by an LLM
+               against that material before it commits to an answer, instead of a confident
+               guess pulled from thin air.</p>
+            <a class="cta-button" href="/analyze">Analyze a problem →</a>
+        </header>
+
+        <section class="steps">
+            <h2 class="section-label">How it works</h2>
+            <ol class="steps-list">
+                <li><strong>Embed</strong> — your problem statement becomes a vector.</li>
+                <li><strong>Retrieve</strong> — the closest-matching patterns come back from the reference library, ranked by similarity.</li>
+                <li><strong>Judge</strong> — an LLM checks the fit against the retrieved material and explains it, or says plainly when nothing matches.</li>
+            </ol>
+        </section>
+
+        <section class="patterns">
+            <h2 class="section-label">Currently covers</h2>
+            <div class="pattern-chips">
+                <span class="chip">Two Pointers</span>
+                <span class="chip">Sliding Window</span>
+                <span class="chip">Binary Search on Answer</span>
+                <span class="chip">BFS / DFS on Graphs and Grids</span>
+                <span class="chip">Dynamic Programming</span>
+                <span class="chip">Backtracking</span>
+                <span class="chip">Bit manipulation</span>
+                <span class="chip">Prefix Sum</span>
+                <span class="chip">Topological Sort/span>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
